@@ -1,0 +1,85 @@
+const { Customer } = require ("../models/index.js");
+const bcrypt = require ("bcryptjs");
+const jwt = require ("jsonwebtoken");
+const { jwt_secret } = require ("../config/config.json")["development"];
+const CustomerController = {
+    create(req,res) {
+        console.log("object")
+        req.body.role = "customer";
+        const password = bcrypt.hashSync(req.body.password,10)
+        Customer.create({...req.body,password})
+        .then(customer => res.status(201).send({ message: 'Customer created succesfully', customer }))
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send(err);
+          });
+      },
+      getAll(req, res) {
+        Customer.findAll()
+          .then((customers) => res.send(customers))
+          .catch((err) => {
+            console.log(err);
+            res.status(500).send({
+              message: "There was a problem to find",
+            });
+          });
+      },
+      async delete(req, res) {
+        await Customer.destroy({
+          where: {
+            id: req.params.id,
+          },
+        });
+        res.send("The customer has been successfully deleted");
+      },
+      async update(req, res) {
+        await Customer.update(req.body, {
+          where: {
+            id: req.params.id,
+          },
+        });
+        res.send("Customer successfully updated");
+      },
+      login(req, res) {
+        Customer.findOne({
+          where: {
+            email: req.body.email,
+          },
+        }).then((customers) => {
+          if (!customer) {
+            return res
+              .status(400)
+              .send({ message: "Incorrect username or password" });
+          }
+          const isMatch = bcrypt.compareSync(req.body.password, customer.password);
+          if (!isMatch) {
+            return res
+              .status(400)
+              .send({ message: "Incorrect username or password" });
+          }
+          const token = jwt.sign({ id: customer.id }, jwt_secret);
+          Token.create({ token, CustomerId: customer.id });
+          res.send({ msg: `Welcome ${customer.FirstName}`, token, customer });
+        });
+      },
+      async logout(req, res) {
+        try {
+          await Token.destroy({
+            where: {
+              [Op.and]: [
+                { CustomerId: req.customer.id },
+                { token: req.headers.authorization },
+              ],
+            },
+          });
+          res.send({ message: "Successfully logout" });
+        } catch (error) {
+          console.log(error);
+          res
+            .status(500)
+            .send({ message: "There was a problem trying to disconnect you" });
+        }
+      },
+    };
+    
+module.exports = CustomerController

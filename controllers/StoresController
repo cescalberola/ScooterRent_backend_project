@@ -1,17 +1,17 @@
-const { Scooter } = require ("../models/index.js");
-const ScooterController = {
+const { Store } = require ("../models/index.js");
+const StoreController = {
     create(req,res) {
         console.log("object")
-        Scooter.create(req.body)
-        .then(scooter => res.status(201).send({ message: 'Scooter created succesfully', scooter }))
+        Store.create(req.body)
+        .then(store => res.status(201).send({ message: 'Store created succesfully', store }))
         .catch((err) => {
             console.error(err);
             res.status(500).send(err);
           });
       },
       getAll(req, res) {
-        Scooter.findAll()
-          .then((scooters) => res.send(scooters))
+        Store.findAll()
+          .then((stores) => res.send(stores))
           .catch((err) => {
             console.log(err);
             res.status(500).send({
@@ -20,21 +20,21 @@ const ScooterController = {
           });
       },
       async delete(req, res) {
-        await Scooter.destroy({
+        await Store.destroy({
           where: {
             id: req.params.id,
           },
         });
-        res.send("The scooter has been successfully deleted");
+        res.send("The store has been successfully deleted");
       },
       async update(req, res) {
-        await Scooter.update(req.body, {
+        await Store.update(req.body, {
           where: {
             id: req.params.id,
           },
         });
-        res.send("Scooter successfully updated");
+        res.send("Store successfully updated");
       },
     }
     
-module.exports = ScooterController
+module.exports = StoreController

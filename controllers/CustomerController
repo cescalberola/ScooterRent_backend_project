@@ -1,4 +1,4 @@
-const { Customer } = require ("../models/index.js");
+const { Customer, Token } = require ("../models/index.js");
 const bcrypt = require ("bcryptjs");
 const jwt = require ("jsonwebtoken");
 const { jwt_secret } = require ("../config/config.json")["development"];
@@ -45,7 +45,7 @@ const CustomerController = {
           where: {
             email: req.body.email,
           },
-        }).then((customers) => {
+        }).then((customer) => {
           if (!customer) {
             return res
               .status(400)

@@ -7,7 +7,7 @@ router.post("/",CustomerController.create);
 router.get("/", CustomerController.getAll);
 router.delete("/id/:id", CustomerController.delete);
 router.put("/id/:id", CustomerController.update);
-// router.post("/login", CustomerController.login);
+router.post("/login", CustomerController.login);
 
 
 module.exports = router;

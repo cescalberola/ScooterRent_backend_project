@@ -1,7 +1,8 @@
-const { Customer, Token } = require ("../models/index.js");
+const { Customer, Token, Sequelize } = require ("../models/index.js");
 const bcrypt = require ("bcryptjs");
 const jwt = require ("jsonwebtoken");
 const { jwt_secret } = require ("../config/config.json")["development"];
+const { Op} = Sequelize;
 const CustomerController = {
     create(req,res) {
         console.log("object")

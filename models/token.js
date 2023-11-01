@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Token.init({
     token: DataTypes.STRING,
-    UserId: DataTypes.INTEGER
+    CustomerId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Token',

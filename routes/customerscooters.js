@@ -4,5 +4,6 @@ const CustomerScooterController = require("../controllers/CustomerScooterControl
 const router = express.Router();
 
 router.post("/",CustomerScooterController.create);
+router.get("/", CustomerScooterController.getAll);
 
 module.exports = router;

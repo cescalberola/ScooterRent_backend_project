@@ -16,8 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   CustomerScooter.init({
     ScooterId: DataTypes.INTEGER,
     CustomerId: DataTypes.INTEGER,
-    DateRented: DataTypes.DATE,
-    DueDate: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'CustomerScooter',

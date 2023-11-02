@@ -1,4 +1,4 @@
-const { Store } = require ("../models/index.js");
+const { Store, Customer } = require ("../models/index.js");
 const StoreController = {
     create(req,res) {
         console.log("object")
@@ -10,7 +10,9 @@ const StoreController = {
           });
       },
       getAll(req, res) {
-        Store.findAll()
+        Store.findAll({
+          include: [{ model: Customer, through: { attributes: [] } }],
+        })
           .then((stores) => res.send(stores))
           .catch((err) => {
             console.log(err);

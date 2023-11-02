@@ -1,0 +1,14 @@
+const { StoreScooter  } = require ("../models/index.js");
+const StoreScooterController = {
+    create(req,res) {
+        console.log("object")
+        StoreScooter.create(req.body)
+        .then(storeScooter  => res.status(201).send({ message: 'StoreScooter created succesfully', storeScooter }))
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send(err);
+          });
+        }
+    }
+
+    module.exports = StoreScooterController

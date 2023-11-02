@@ -15,12 +15,6 @@ module.exports = {
       CustomerId: {
         type: Sequelize.INTEGER
       },
-      DateRented: {
-        type: Sequelize.DATE
-      },
-      DueDate: {
-        type: Sequelize.DATE
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

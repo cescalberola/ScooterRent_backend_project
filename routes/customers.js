@@ -6,12 +6,10 @@ const router = express.Router();
 
 router.post("/",CustomerController.create);
 router.get("/", CustomerController.getAll);
+router.get('/id/:id', CustomerController.getById)
 router.delete("/id/:id", CustomerController.delete);
 router.put("/id/:id", CustomerController.update);
 router.post("/login", CustomerController.login);
 router.delete("/logout",authentication, CustomerController.logout);
-
-
-
 
 module.exports = router;

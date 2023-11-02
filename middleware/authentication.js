@@ -17,13 +17,13 @@ const authentication = async(req, res, next) => {
             }
         });
         if (!tokenFound) {
-            return res.status(401).send({ message: 'No estas autorizado' });
+            return res.status(401).send({ message: "You're not authorized"});
         }
         req.customer = customer;
         next();
     } catch (error) {
         console.log(error)
-        res.status(500).send({ error, message: 'Ha habido un problema con el token' })
+        res.status(500).send({ error, message: "There has been a problem with the token" })
     }
 }
 module.exports = { authentication }

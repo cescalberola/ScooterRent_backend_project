@@ -33,6 +33,19 @@ const CustomerController = {
             });
           });
       },
+
+      getOneByName(req, res) {
+        Customer.findOne({
+                where: {
+                  FirstName: {
+                        [Op.like]: `%${req.params.name}%`
+                    }
+                },
+            })
+            .then(post => res.send(post))
+    },
+
+
       async delete(req, res) {
         await Customer.destroy({
           where: {

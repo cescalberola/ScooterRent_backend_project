@@ -16,92 +16,92 @@ const CustomerController = {
           });
       },
     
-      getById(req, res) {
-        Customer.findByPk(req.params.id)
-            .then(customer => res.send(customer))
-    },
+    getById(req, res) {
+      Customer.findByPk(req.params.id)
+          .then(customer => res.send(customer))
+  },
  
-      getAll(req, res) {
-        Customer.findAll({
-          include: [{ model: Store, through: { attributes: [] } }],
-        })
-          .then((customers) => res.send(customers))
-          .catch((err) => {
-            console.log(err);
-            res.status(500).send({
-              message: "There was a problem to find",
-            });
+    getAll(req, res) {
+      Customer.findAll({
+        include: [{ model: Store, through: { attributes: [] } }],
+      })
+        .then((customers) => res.send(customers))
+        .catch((err) => {
+          console.log(err);
+          res.status(500).send({
+            message: "There was a problem to find",
           });
-      },
-
-      getOneByName(req, res) {
-        Customer.findOne({
-                where: {
-                  FirstName: {
-                        [Op.like]: `%${req.params.name}%`
-                    }
-                },
-            })
-            .then(post => res.send(post))
+        });
     },
 
+    getOneByName(req, res) {
+      Customer.findOne({
+              where: {
+                FirstName: {
+                      [Op.like]: `%${req.params.name}%`
+                  }
+              },
+          })
+          .then(post => res.send(post))
+  },
 
-      async delete(req, res) {
-        await Customer.destroy({
-          where: {
-            id: req.params.id,
-          },
-        });
-        res.send("The customer has been successfully deleted");
-      },
-      async update(req, res) {
-        await Customer.update(req.body, {
-          where: {
-            id: req.params.id,
-          },
-        });
-        res.send("Customer successfully updated");
-      },
-      login(req, res) {
-        Customer.findOne({
-          where: {
-            email: req.body.email,
-          },
-        }).then((customer) => {
-          if (!customer) {
-            return res
-              .status(400)
-              .send({ message: "Incorrect username or password" });
-          }
-          const isMatch = bcrypt.compareSync(req.body.password, customer.password);
-          if (!isMatch) {
-            return res
-              .status(400)
-              .send({ message: "Incorrect username or password" });
-          }
-          const token = jwt.sign({ id: customer.id }, jwt_secret);
-          Token.create({ token, CustomerId: customer.id });
-          res.send({ msg: `Welcome ${customer.FirstName}`, token, customer });
-        });
-      },
-      async logout(req, res) {
-        try {
-          await Token.destroy({
-            where: {
-              [Op.and]: [
-                { CustomerId: req.customer.id },
-                { token: req.headers.authorization },
-              ],
-            },
-          });
-          res.send({ message: "Successfully logout" });
-        } catch (error) {
-          console.log(error);
-          res
-            .status(500)
-            .send({ message: "There was a problem trying to disconnect you" });
+
+    async delete(req, res) {
+      await Customer.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.send("The customer has been successfully deleted");
+    },
+    async update(req, res) {
+      await Customer.update(req.body, {
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.send("Customer successfully updated");
+    },
+    login(req, res) {
+      Customer.findOne({
+        where: {
+          email: req.body.email,
+        },
+      }).then((customer) => {
+        if (!customer) {
+          return res
+            .status(400)
+            .send({ message: "Incorrect username or password" });
         }
-      },
-    };
-    
+        const isMatch = bcrypt.compareSync(req.body.password, customer.password);
+        if (!isMatch) {
+          return res
+            .status(400)
+            .send({ message: "Incorrect username or password" });
+        }
+        const token = jwt.sign({ id: customer.id }, jwt_secret);
+        Token.create({ token, CustomerId: customer.id });
+        res.send({ msg: `Welcome ${customer.FirstName}`, token, customer });
+      });
+    },
+    async logout(req, res) {
+      try {
+        await Token.destroy({
+          where: {
+            [Op.and]: [
+              { CustomerId: req.customer.id },
+              { token: req.headers.authorization },
+            ],
+          },
+        });
+        res.send({ message: "Successfully logout" });
+      } catch (error) {
+        console.log(error);
+        res
+          .status(500)
+          .send({ message: "There was a problem trying to disconnect you" });
+      }
+    },
+  };
+  
 module.exports = CustomerController

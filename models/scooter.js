@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   Scooter.init({
     Brand: DataTypes.STRING,
     Model: DataTypes.STRING,
+    Price:DataTypes.INTEGER,
     StoreId:DataTypes.INTEGER
   }, {
     sequelize,

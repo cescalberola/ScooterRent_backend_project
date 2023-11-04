@@ -9,34 +9,34 @@ const StoreController = {
             res.status(500).send(err);
           });
       },
-      getAll(req, res) {
-        Store.findAll({
-          include: [{ model: Customer, through: { attributes: [] } }],
-        })
-          .then((stores) => res.send(stores))
-          .catch((err) => {
-            console.log(err);
-            res.status(500).send({
-              message: "There was a problem to find",
-            });
+    getAll(req, res) {
+      Store.findAll({
+        include: [{ model: Customer, through: { attributes: [] } }],
+      })
+        .then((stores) => res.send(stores))
+        .catch((err) => {
+          console.log(err);
+          res.status(500).send({
+            message: "There was a problem to find",
           });
-      },
-      async delete(req, res) {
-        await Store.destroy({
-          where: {
-            id: req.params.id,
-          },
         });
-        res.send("The store has been successfully deleted");
-      },
-      async update(req, res) {
-        await Store.update(req.body, {
-          where: {
-            id: req.params.id,
-          },
-        });
-        res.send("Store successfully updated");
-      },
-    }
-    
+    },
+    async delete(req, res) {
+      await Store.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.send("The store has been successfully deleted");
+    },
+    async update(req, res) {
+      await Store.update(req.body, {
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.send("Store successfully updated");
+    },
+  }
+  
 module.exports = StoreController

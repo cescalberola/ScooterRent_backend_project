@@ -1,4 +1,5 @@
-const { Scooter } = require ("../models/index.js");
+const { Scooter, Sequelize } = require ("../models/index.js");
+const { Op} = Sequelize;
 const ScooterController = {
     create(req,res) {
         console.log("object")
@@ -9,6 +10,26 @@ const ScooterController = {
             res.status(500).send(err);
           });
       },
+
+      getById(req, res) {
+        Scooter.findByPk(req.params.id)
+            .then(scooter => res.send(scooter))
+    },
+
+      getOneByName(req, res) {
+        Scooter.findOne({
+                where: {
+                  Brand: {
+                        [Op.like]: `%${req.params.name}%`
+                    },
+                  Model: {
+                        [Op.like]: `%${req.params.name}%`
+                    }
+                },
+            })
+            .then(scooter => res.send(scooter))
+    },
+
       getAll(req, res) {
         Scooter.findAll()
           .then((scooters) => res.send(scooters))

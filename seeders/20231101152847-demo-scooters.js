@@ -7,36 +7,42 @@ module.exports = {
       {
       Brand: "Cecotec",
       Model: "Bongo Serie Y65",
+      Price: 25,
       createdAt: new Date(),
       updatedAt: new Date()
     },
       {
       Brand: "Segway",
       Model: "E2 Pro",
+      Price: 32,
       createdAt: new Date(),
       updatedAt: new Date()
     },
       {
       Brand: "Zwheel",
       Model: "T4 Zrino",
+      Price: 35,
       createdAt: new Date(),
       updatedAt: new Date()
     },
       {
       Brand: "SmartGyro",
       Model: "Xtreme Speedway Pro",
+      Price: 22,
       createdAt: new Date(),
       updatedAt: new Date()
     },
       {
       Brand: "Ninebot",
       Model: "G30 Max",
+      Price: 37,
       createdAt: new Date(),
       updatedAt: new Date()
     },
       {
       Brand: "Xiaomi",
       Model: "m360",
+      Price: 20,
       createdAt: new Date(),
       updatedAt: new Date()
     },

@@ -1,4 +1,4 @@
-const { Review } = require('../models/index.js');
+const { Review,Customer } = require('../models/index.js');
 
 const ReviewController = {
     create(req, res) {
@@ -9,6 +9,26 @@ const ReviewController = {
                 res.status(500).send({msg: "There has been an error",err})
             });
     },
+    getAll(req, res) {
+        Review.findAll({
+                include: [{model: Customer, attributes: ['email', 'Firstname']}]
+            })
+            .then(reviews => res.send(reviews))
+            .catch(err => {
+                console.error(err)
+                res.status(500).send({ message: 'There was a problem loading publications' })
+            })
+    },
+
+    getById(req, res) {
+        Review.findByPk(req.params.id, {
+                include: [Customer]
+            })
+            .then(post => res.send(post))
+    },
+
+
+
 }
 
 module.exports = ReviewController

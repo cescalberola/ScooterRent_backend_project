@@ -1,4 +1,4 @@
-const { Customer, Store, Token, Sequelize } = require ("../models/index.js");
+const { Customer, Store, Token, Sequelize, Review } = require ("../models/index.js");
 const bcrypt = require ("bcryptjs");
 const jwt = require ("jsonwebtoken");
 const { jwt_secret } = require ("../config/config.json")["development"];
@@ -23,7 +23,7 @@ const CustomerController = {
  
     getAll(req, res) {
       Customer.findAll({
-        include: [{ model: Store, through: { attributes: [] } }],
+        include: [Review],
       })
         .then((customers) => res.send(customers))
         .catch((err) => {

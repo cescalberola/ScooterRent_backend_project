@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/",CustomerController.create);
 router.post("/login", CustomerController.login);
-router.get("/",authentication, CustomerController.getAll);
+router.get("/", CustomerController.getAll);
 router.get("/id/:id", CustomerController.getById);
 router.get("/name/:name", CustomerController.getOneByName);
 router.put("/id/:id",authentication, CustomerController.update);

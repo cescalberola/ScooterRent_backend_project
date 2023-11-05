@@ -1,8 +1,9 @@
-const { Review,Customer } = require('../models/index.js');
+const { Review,Customer, Sequelize } = require('../models/index.js');
+const { Op } = Sequelize;
 
 const ReviewController = {
     create(req, res) {
-        Review.create(req.body)
+        Review.create({...req.body,CustomerId:req.customer.id})
             .then(review => res.status(201).send({ message: 'Review created succesfully', review }))
             .catch ((err)=>{
                 console.error(err)
@@ -26,6 +27,33 @@ const ReviewController = {
             })
             .then(post => res.send(post))
     },
+
+    getOneByName(req, res) {
+        Review.findOne({
+                where: {
+                    title: {
+                        [Op.like]: `%${req.params.title}%`
+                    }
+                },
+                include: [Customer]
+            })
+            .then(post => res.send(post))
+    },
+
+    async delete(req, res) {
+        try {
+            await Review.destroy({
+                where: {
+                    id: req.params.id
+                }
+            });
+            res.send('The review has been successfully removed');
+        }catch (error){
+            console.error(error);
+    }
+    },
+
+
 
 
 

@@ -1,8 +1,8 @@
-const { Customer, Store, Token, Sequelize, Review } = require ("../models/index.js");
+const { Customer, Token, Sequelize, Review } = require ("../models/index.js");
 const bcrypt = require ("bcryptjs");
 const jwt = require ("jsonwebtoken");
 const { jwt_secret } = require ("../config/config.json")["development"];
-const { Op} = Sequelize;
+const { Op } = Sequelize;
 const CustomerController = {
     create(req,res) {
         console.log("object")
@@ -45,15 +45,20 @@ const CustomerController = {
           .then(post => res.send(post))
   },
 
-
     async delete(req, res) {
       await Customer.destroy({
         where: {
           id: req.params.id,
-        },
-      });
+        }
+      })
+      await Review.destroy({
+          where: {
+              CustomerId: req.params.id
+          }
+      })
       res.send("The customer has been successfully deleted");
     },
+    
     async update(req, res) {
       await Customer.update(req.body, {
         where: {
@@ -62,6 +67,7 @@ const CustomerController = {
       });
       res.send("Customer successfully updated");
     },
+
     login(req, res) {
       Customer.findOne({
         where: {
@@ -84,6 +90,7 @@ const CustomerController = {
         res.send({ msg: `Welcome ${customer.FirstName}`, token, customer });
       });
     },
+
     async logout(req, res) {
       try {
         await Token.destroy({

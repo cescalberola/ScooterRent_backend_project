@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     Customer.belongsToMany(models.Scooter,{
       through:models.CustomerScooter 
     })
+    Customer.hasMany(models.Review);
     }
   }
   Customer.init({

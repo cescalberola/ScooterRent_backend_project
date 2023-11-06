@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       Scooter.belongsToMany(models.Customer,{
         through:models.CustomerScooter 
       })
-        Scooter.belongsToMany(models.Store,{
-          through:models.StoreScooter
-        })
-    
+      Scooter.belongsTo(models.Store,{
+        through:models.StoreScooter
+      })
+      Scooter.hasMany(models.Review)
     
     }
   }
@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     Brand: DataTypes.STRING,
     Model: DataTypes.STRING,
     Price:DataTypes.INTEGER,
-    StoreId:DataTypes.INTEGER
+    StoreId:DataTypes.INTEGER,
+    ReviewId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Scooter',

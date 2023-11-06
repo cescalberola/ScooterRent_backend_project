@@ -1,61 +1,81 @@
-const { Scooter, Sequelize } = require ("../models/index.js");
-const { Op} = Sequelize;
+const {
+  Scooter,
+  CustomerScooter,
+  Review,
+  Sequelize,
+} = require("../models/index.js");
+const { Op } = Sequelize;
 const ScooterController = {
-    create(req,res) {
-        console.log("object")
-        Scooter.create(req.body)
-        .then(scooter => res.status(201).send({ message: 'Scooter created succesfully', scooter }))
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send(err);
-          });
+  create(req, res) {
+    console.log("object");
+    Scooter.create(req.body)
+      .then((scooter) =>
+        res
+          .status(201)
+          .send({ message: "Scooter created succesfully", scooter })
+      )
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send(err);
+      });
+  },
+
+  getById(req, res) {
+    Scooter.findByPk(req.params.id).then((scooter) => res.send(scooter));
+  },
+
+  getOneByName(req, res) {
+    Scooter.findOne({
+      where: {
+        Brand: {
+          [Op.like]: `%${req.params.name}%`,
+        },
       },
+    }).then((scooter) => res.send(scooter));
+  },
 
-      getById(req, res) {
-        Scooter.findByPk(req.params.id)
-            .then(scooter => res.send(scooter))
-    },
-
-      getOneByName(req, res) {
-        Scooter.findOne({
-                where: {
-                  Brand: {
-                        [Op.like]: `%${req.params.name}%`
-                    },
-                  Model: {
-                        [Op.like]: `%${req.params.name}%`
-                    }
-                },
-            })
-            .then(scooter => res.send(scooter))
-    },
-
-      getAll(req, res) {
-        Scooter.findAll()
-          .then((scooters) => res.send(scooters))
-          .catch((err) => {
-            console.log(err);
-            res.status(500).send({
-              message: "There was a problem to find",
-            });
-          });
-      },
-      async delete(req, res) {
-        await Scooter.destroy({
-          where: {
-            id: req.params.id,
-          },
+  getAll(req, res) {
+    Scooter.findAll({
+      include: [CustomerScooter, Review],
+    })
+      .then((scooters) => res.send(scooters))
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send({
+          message: "There was a problem to find",
         });
-        res.send("The scooter has been successfully deleted");
+      });
+  },
+  async delete(req, res) {
+    await Scooter.destroy({
+      where: {
+        id: req.params.id,
       },
-      async update(req, res) {
-        await Scooter.update(req.body, {
-          where: {
-            id: req.params.id,
-          },
-        });
-        res.send("Scooter successfully updated");
+    });
+    res.send("The scooter has been successfully deleted");
+  },
+  async update(req, res) {
+    await Scooter.update(req.body, {
+      where: {
+        id: req.params.id,
       },
+    });
+    res.send("Scooter successfully updated");
+  },
+
+  async sortByPrice(req, res) {
+    try {
+      const scooter = await Scooter.findAll({
+        order: [["price", "ASC"]],
+      });
+      res.send(scooter);
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send("Unexpected error while trying to sort the Scooters");
     }
-    
-module.exports = ScooterController
+  },
+};
+
+module.exports = ScooterController;

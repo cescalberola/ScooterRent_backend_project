@@ -1,4 +1,4 @@
-const { Review,Customer, Sequelize } = require('../models/index.js');
+const { Review, Customer, Sequelize } = require('../models/index.js');
 const { Op } = Sequelize;
 
 const ReviewController = {
@@ -39,6 +39,15 @@ const ReviewController = {
             })
             .then(post => res.send(post))
     },
+
+    async update(req, res) {
+        await Review.update(req.body, {
+          where: {
+            id: req.params.id,
+          },
+        });
+        res.send("Review successfully updated");
+      },
 
     async delete(req, res) {
         try {

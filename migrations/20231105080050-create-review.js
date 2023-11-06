@@ -18,6 +18,9 @@ module.exports = {
       CustomerId: {
         type: Sequelize.INTEGER
       },
+      ScooterId:{
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

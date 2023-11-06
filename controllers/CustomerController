@@ -1,114 +1,143 @@
-const { Customer, Token, Sequelize, Review } = require ("../models/index.js");
-const bcrypt = require ("bcryptjs");
-const jwt = require ("jsonwebtoken");
-const { jwt_secret } = require ("../config/config.json")["development"];
+const { Customer, Token, Sequelize, Review } = require("../models/index.js");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { jwt_secret } = require("../config/config.json")["development"];
 const { Op } = Sequelize;
+
 const CustomerController = {
-    create(req,res) {
-        console.log("object")
-        req.body.role = "customer";
-        const password = bcrypt.hashSync(req.body.password,10)
-        Customer.create({...req.body,password})
-        .then(customer => res.status(201).send({ message: 'Customer created succesfully', customer }))
-        .catch((err) => {
-            console.error(err);
-            res.status(500).send(err);
-          });
-      },
-    
-    getById(req, res) {
-      Customer.findByPk(req.params.id)
-          .then(customer => res.send(customer))
+  async create(req, res) {
+    try {
+      console.log("object");
+      req.body.role = "customer";
+      const password = bcrypt.hashSync(req.body.password, 10);
+      const customer = await Customer.create({ ...req.body, password });
+      res.status(201).send({ message: 'Customer created successfully', customer });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send(err);
+    }
   },
- 
-    getAll(req, res) {
-      Customer.findAll({
+
+  async getById(req, res) {
+    try {
+      const customer = await Customer.findByPk(req.params.id);
+      res.send(customer);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send(err);
+    }
+  },
+
+  async getAll(req, res) {
+    try {
+      const customers = await Customer.findAll({
         include: [Review],
-      })
-        .then((customers) => res.send(customers))
-        .catch((err) => {
-          console.log(err);
-          res.status(500).send({
-            message: "There was a problem to find",
-          });
-        });
-    },
-
-    getOneByName(req, res) {
-      Customer.findOne({
-              where: {
-                FirstName: {
-                      [Op.like]: `%${req.params.name}%`
-                  }
-              },
-          })
-          .then(post => res.send(post))
+      });
+      res.send(customers);
+    } catch (err) {
+      console.log(err);
+      res.status(500).send({
+        message: "There was a problem finding customers",
+      });
+    }
   },
 
-    async delete(req, res) {
+  async getOneByName(req, res) {
+    try {
+      const customer = await Customer.findOne({
+        where: {
+          FirstName: {
+            [Op.like]: `%${req.params.name}%`
+          }
+        },
+      });
+      res.send(customer);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send(err);
+    }
+  },
+
+  async delete(req, res) {
+    try {
       await Customer.destroy({
         where: {
           id: req.params.id,
         }
-      })
+      });
       await Review.destroy({
-          where: {
-              CustomerId: req.params.id
-          }
-      })
+        where: {
+          CustomerId: req.params.id
+        }
+      });
       res.send("The customer has been successfully deleted");
-    },
-    
-    async update(req, res) {
+    } catch (err) {
+      console.error(err);
+      res.status(500).send(err);
+    }
+  },
+
+  async update(req, res) {
+    try {
       await Customer.update(req.body, {
         where: {
           id: req.params.id,
         },
       });
       res.send("Customer successfully updated");
-    },
+    } catch (err) {
+      console.error(err);
+      res.status(500).send(err);
+    }
+  },
 
-    login(req, res) {
-      Customer.findOne({
+  async login(req, res) {
+    try {
+      const customer = await Customer.findOne({
         where: {
           email: req.body.email,
         },
-      }).then((customer) => {
-        if (!customer) {
-          return res
-            .status(400)
-            .send({ message: "Incorrect username or password" });
-        }
-        const isMatch = bcrypt.compareSync(req.body.password, customer.password);
-        if (!isMatch) {
-          return res
-            .status(400)
-            .send({ message: "Incorrect username or password" });
-        }
-        const token = jwt.sign({ id: customer.id }, jwt_secret);
-        Token.create({ token, CustomerId: customer.id });
-        res.send({ msg: `Welcome ${customer.FirstName}`, token, customer });
       });
-    },
 
-    async logout(req, res) {
-      try {
-        await Token.destroy({
-          where: {
-            [Op.and]: [
-              { CustomerId: req.customer.id },
-              { token: req.headers.authorization },
-            ],
-          },
-        });
-        res.send({ message: "Successfully logout" });
-      } catch (error) {
-        console.log(error);
-        res
-          .status(500)
-          .send({ message: "There was a problem trying to disconnect you" });
+      if (!customer) {
+        return res
+          .status(400)
+          .send({ message: "Incorrect username or password" });
       }
-    },
-  };
-  
+
+      const isMatch = bcrypt.compareSync(req.body.password, customer.password);
+
+      if (!isMatch) {
+        return res
+          .status(400)
+          .send({ message: "Incorrect username or password" });
+      }
+
+      const token = jwt.sign({ id: customer.id }, jwt_secret);
+      await Token.create({ token, CustomerId: customer.id });
+      res.send({ msg: `Welcome ${customer.FirstName}`, token, customer });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send(err);
+    }
+  },
+
+  async logout(req, res) {
+    try {
+      await Token.destroy({
+        where: {
+          [Op.and]: [
+            { CustomerId: req.customer.id },
+            { token: req.headers.authorization },
+          ],
+        },
+      });
+      res.send({ message: "Successfully logged out" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ message: "There was a problem trying to disconnect you" });
+    }
+  },
+};
+
 module.exports = CustomerController

@@ -21,6 +21,9 @@ module.exports = {
       StoreId: {
         type: Sequelize.INTEGER
       },
+      ReviewId: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

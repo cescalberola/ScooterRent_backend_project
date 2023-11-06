@@ -11,6 +11,8 @@ router.get("/name/:name", ScooterController.getOneByName);
 router.get("/", ScooterController.getAll);
 router.delete("/id/:id",isAdmin,ScooterController.delete);
 router.put("/id/:id",isAdmin,ScooterController.update);
+router.get("/price/desc", ScooterController.sortByPrice);
+router.get("/price/:price",ScooterController.getByPrice);
 
 
 module.exports = router;

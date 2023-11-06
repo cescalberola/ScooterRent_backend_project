@@ -2,52 +2,70 @@ const { Review, Customer, Sequelize } = require('../models/index.js');
 const { Op } = Sequelize;
 
 const ReviewController = {
-    create(req, res) {
-        Review.create({...req.body,CustomerId:req.customer.id})
-            .then(review => res.status(201).send({ message: 'Review created succesfully', review }))
-            .catch ((err)=>{
-                console.error(err)
-                res.status(500).send({msg: "There has been an error",err})
+    async create(req, res) {
+        try {
+            const review = await Review.create({...req.body, CustomerId: req.customer.id});
+            res.status(201).send({ message: 'Review created successfully', review });
+        } catch (err) {
+            console.error(err);
+            res.status(500).send({ msg: "There has been an error", err });
+        }
+    },
+
+    async getAll(req, res) {
+        try {
+            const reviews = await Review.findAll({
+                include: [{ model: Customer, attributes: ['email', 'Firstname'] }]
             });
-    },
-    getAll(req, res) {
-        Review.findAll({
-                include: [{model: Customer, attributes: ['email', 'Firstname']}]
-            })
-            .then(reviews => res.send(reviews))
-            .catch(err => {
-                console.error(err)
-                res.status(500).send({ message: 'There was a problem loading publications' })
-            })
+            res.send(reviews);
+        } catch (err) {
+            console.error(err);
+            res.status(500).send({ message: 'There was a problem loading publications' });
+        }
     },
 
-    getById(req, res) {
-        Review.findByPk(req.params.id, {
+    async getById(req, res) {
+        try {
+            const post = await Review.findByPk(req.params.id, {
                 include: [Customer]
-            })
-            .then(post => res.send(post))
+            });
+            res.send(post);
+        } catch (err) {
+            console.error(err);
+            res.status(500).send({ message: 'There was a problem loading the review' });
+        }
     },
 
-    getOneByName(req, res) {
-        Review.findOne({
+    async getOneByName(req, res) {
+        try {
+            const post = await Review.findOne({
                 where: {
                     title: {
                         [Op.like]: `%${req.params.title}%`
                     }
                 },
                 include: [Customer]
-            })
-            .then(post => res.send(post))
+            });
+            res.send(post);
+        } catch (err) {
+            console.error(err);
+            res.status(500).send({ message: 'There was a problem loading the review' });
+        }
     },
 
     async update(req, res) {
-        await Review.update(req.body, {
-          where: {
-            id: req.params.id,
-          },
-        });
-        res.send("Review successfully updated");
-      },
+        try {
+            await Review.update(req.body, {
+                where: {
+                    id: req.params.id,
+                },
+            });
+            res.send("Review successfully updated");
+        } catch (err) {
+            console.error(err);
+            res.status(500).send({ message: 'There was an error updating the review' });
+        }
+    },
 
     async delete(req, res) {
         try {
@@ -57,15 +75,11 @@ const ReviewController = {
                 }
             });
             res.send('The review has been successfully removed');
-        }catch (error){
-            console.error(error);
-    }
+        } catch (err) {
+            console.error(err);
+            res.status(500).send({ message: 'There was an error deleting the review' });
+        }
     },
-
-
-
-
-
 }
 
 module.exports = ReviewController

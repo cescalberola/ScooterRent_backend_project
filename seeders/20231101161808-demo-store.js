@@ -5,21 +5,21 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert ( 'Stores', [
       {
-      StoreName: "UrbanMover",
+      StoreName: "Urban Mover",
       City: "Valencia",
       Adress: "Calle Colón, 16",
       createdAt: new Date(),
       updatedAt: new Date()
     },
       {
-      StoreName: "UrbanMover",
+      StoreName: "Patinet",
       City: "Valencia",
       Adress: "Paseo Germanias, 162",
       createdAt: new Date(),
       updatedAt: new Date()
     },
       {
-      StoreName: "UrbanMover",
+      StoreName: "Scooters Valencia",
       City: "Valencia",
       Adress: "Calle Denia, 12",
       createdAt: new Date(),

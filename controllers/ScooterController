@@ -100,7 +100,7 @@ const ScooterController = {
         },
       });
       if (scooter.length < 1) {
-        res.status(404).send("Product with that price is not found");
+       return res.status(404).send("Product with that price is not found");
       }
       res.send(scooter);
     } catch (error) {

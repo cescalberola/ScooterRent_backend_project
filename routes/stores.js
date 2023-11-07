@@ -7,5 +7,6 @@ router.post("/",StoreController.create);
 router.get("/", StoreController.getAll);
 router.delete("/id/:id", StoreController.delete);
 router.put("/id/:id", StoreController.update);
+router.get("/StoreName/:StoreName",StoreController.getOneByName)
 
 module.exports = router;

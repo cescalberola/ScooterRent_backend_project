@@ -1,4 +1,5 @@
-const { Store, Scooter } = require("../models/index.js");
+const { Store, Scooter, Sequelize} = require("../models/index.js");
+const { Op } = Sequelize;
 
 const StoreController = {
   async create(req, res) {
@@ -11,6 +12,23 @@ const StoreController = {
       res.status(500).send(err);
     }
   },
+
+  async getOneByName(req, res) {
+    try {
+        const store = await Store.findOne({
+            where: {
+              StoreName: {
+                    [Op.like]: `%${req.params.StoreName}%`
+                }
+            },
+        });
+        res.send(store);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ message: 'There was a problem loading the Store' });
+    }
+},
+
   async getAll(req, res) {
     try {
       const stores = await Store.findAll({

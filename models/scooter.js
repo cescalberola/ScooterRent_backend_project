@@ -17,9 +17,33 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
       Scooter.init({
-        Brand: DataTypes.STRING,
-        Model: DataTypes.STRING,
-        Price:DataTypes.INTEGER,
+        Brand:{
+          type: DataTypes.STRING,
+          allowNull: false,
+          validate: {
+            notNull: {
+              msg: "Insert brand scooter, please",
+            },
+          },
+        },
+        Model:{
+          type: DataTypes.STRING,
+          allowNull: false,
+          validate: {
+            notNull: {
+              msg: "Insert your scooter model, please",
+            },
+          },
+        },
+        Price:{
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          validate: {
+            notNull: {
+              msg: "Insert price, please",
+            },
+          },
+        },
         StoreId:DataTypes.INTEGER,
         ReviewId: DataTypes.INTEGER
       }, {

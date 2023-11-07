@@ -36,7 +36,10 @@ For the development of this API, we will be using the following technologies:
 
 - Node.js
 - Express
-- MySQL with Sequelize
+- MySQL
+- Sequelize
+- Jwt
+- Postman
 
 The project will be hosted in a public GitHub repository, and we will appreciate the presence of multiple branches and commits with clear and readable commit messages to analyze the project's evolution. It is essential for the repository to include a comprehensive README.
 

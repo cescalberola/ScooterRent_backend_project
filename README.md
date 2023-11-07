@@ -96,7 +96,7 @@ The project will be hosted in a public GitHub repository, and we will appreciate
 ### 💻 📱 Preview
 
 <p align="center">
-  <img src="assets/diagram.png" width="700px"/>
+  <img src="assets/diagram.png" width="700"/>
 </p>
 
 <p align="center">

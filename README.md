@@ -1,12 +1,10 @@
-## project in process
+# 🛴 Scooter Rent (E-commerce)
 
-# 🛒 Online Store Project (E-commerce)
-
-Welcome to the backend project for the Online Store! In this project, we will combine our knowledge of Node.js, Express, and MySQL/Sequelize to develop a RESTful API for managing an online store. 🚀
+Welcome to my first backend project for the Online Store! In this project, I combine my knowledge of Node.js, Express, and MySQL/Sequelize to develop a RESTful API for managing an online store. 🚀
 
 ## 📝 Description
 
-🛴 The eCommerce project I've developed focuses on a scooter rental store, leveraging the power of MySQL and Sequelize as the database and ORM, respectively. The system comprises several key entities, enabling efficient store management and offering scalability for future expansions 🚀.
+🛴 The eCommerce project I've developed focuses on a scooter rental store, leveraging the power of MySQL and Sequelize as the database and ORM, respectively. The system comprises several key entities, enabling efficient store management and offering scalability for future expansions.
 
 🏪 **Store Table**: This table stores information about scooter rental stores. Each store is associated with multiple scooters available for rent.
 
@@ -93,11 +91,57 @@ The project will be hosted in a public GitHub repository, and we will appreciate
 - **Display Reviews:** Show reviews along with the user who made them.
 - **Update Endpoints:** Update the endpoints to display products with their categories and reviews.
 
+## Getting Started
+
+🚀 This is an example of how you may give instructions on setting up your project locally. To get a local copy up and running, follow these simple example steps.
+
+### Prerequisites
+
+📋 This is an example of how to list things you need to use the software and how to install them.
+* npm
+  ```sh
+  npm install express mysql2 sequelize bcryptjs jsonwebtoken
+
+
+### Installation
+
+🔧 Below is an example of how you can instruct your audience on installing and setting up your app.
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/frances0688/CraftyCrates_backend_project
+   ```
+2. Install NPM packages
+   ```sh
+   npm install express mysql2 sequelize bcryptjs jsonwebtoken
+   ```
+3. Ready to start!
+    ```sh
+    npm start
+    ```
+
+## Contributing
+
+🙌  Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+🌟 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/YourName`)
+3. Commit your Changes (`git commit -m 'Add some YourName'`)
+4. Push to the Branch (`git push origin feature/YourName`)
+5. Open a Pull Request
+
 ### 💻 📱 Preview
 
 <p align="center">
   <img src="assets/diagram rel.png" width="700">
 </p>
+
+## License
+
+©️ This project is under license of [Francesc Alberola](https://github.com/cescalberola)
 
 <p align="center">
 <img src="https://imgs.search.brave.com/50JDDd4L1QxFtnwMrj6rn158HP4VG0qHPxVKtKvCPn4/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/d29ybGR2ZWN0b3Js/b2dvLmNvbS9sb2dv/cy9wb3N0bWFuLnN2/Zw.svg" width="30">
@@ -107,3 +151,4 @@ The project will be hosted in a public GitHub repository, and we will appreciate
   <img src="https://imgs.search.brave.com/TAJpmj8JiLXeqQeY3vY0YqGp0mmJn4jz0oGqxhU12dc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zZWVr/bG9nby5jb20vaW1h/Z2VzL00vbXlzcWwt/bG9nby1CNDk0M0ZF/NkRELXNlZWtsb2dv/LmNvbS5wbmc" width="30">
   <img src="https://imgs.search.brave.com/YAQjymUefXu_L42AtByzTWMvbnqnKQnzMYyxE7tvXrI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9icmFu/ZGVwcy5jb20vbG9n/by1kb3dubG9hZC9T/L1NlcXVlbGl6ZS1s/b2dvLXZlY3Rvci0w/MS5zdmc.svg" width="30">
 </p>
+

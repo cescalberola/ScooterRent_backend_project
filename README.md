@@ -96,7 +96,7 @@ The project will be hosted in a public GitHub repository, and we will appreciate
 ### 💻 📱 Preview
 
 <p align="center">
-  <img src="https://github.com/cescalberola/scooterRent/blob/main/assets/diagram.png" width="800px"/>
+  <img src="/Users/cesc/Documents/BOOTCAMP_FULLSTACK/Core/BACK/scooterRent/assets/diagram.png" width="800px"/>
 </p>
 
 <p align="center">

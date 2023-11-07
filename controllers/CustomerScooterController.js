@@ -1,4 +1,4 @@
-const { CustomerScooter } = require ("../models/index.js");
+const { CustomerScooter, Scooter} = require ("../models/index.js");
 
 const CustomerScooterController = {
   async create (req, res) {
@@ -12,7 +12,9 @@ const CustomerScooterController = {
   },
   async getAll(req, res) {
     try {
-      const customerScooter = await CustomerScooter.findAll();
+      const customerScooter = await CustomerScooter.findAll({
+        include: [Scooter],
+      });
       res.send(customerScooter);
     } catch (err) {
       console.log(err);

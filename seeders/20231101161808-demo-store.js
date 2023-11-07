@@ -17,14 +17,7 @@ module.exports = {
       Adress: "Paseo Germanias, 162",
       createdAt: new Date(),
       updatedAt: new Date()
-    },
-      {
-      StoreName: "Scooters Valencia",
-      City: "Valencia",
-      Adress: "Calle Denia, 12",
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
+      }
   ])
   },
   

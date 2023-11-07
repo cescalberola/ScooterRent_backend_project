@@ -5,7 +5,9 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class CustomerScooter extends Model {
     static associate(models) {
-      // define association here
+
+      CustomerScooter.belongsTo(models.Customer);
+      CustomerScooter.belongsTo(models.Scooter);
     }
   }
   CustomerScooter.init({

@@ -45,7 +45,6 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
         StoreId:DataTypes.INTEGER,
-        ReviewId: DataTypes.INTEGER
       }, {
         sequelize,
         modelName: 'Scooter',

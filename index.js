@@ -8,7 +8,6 @@ app.use("/customers", require("./routes/customers"));
 app.use("/scooters", require("./routes/scooters"));
 app.use("/stores", require("./routes/stores"));
 app.use("/customerscooters", require("./routes/customerscooters"));
-app.use("/storesscooters", require("./routes/storesscooters"));
 app.use("/reviews", require("./routes/reviews.js"));
 
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));

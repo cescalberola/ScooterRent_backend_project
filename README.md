@@ -18,6 +18,8 @@ Welcome to my first backend project for the Online Store! In this project, I com
 
 📈🌟 The project's scalability is ensured, as new stores and services can be added in the future seamlessly, maintaining data integrity and efficient management. This provides a solid foundation for the continuous growth of the scooter rental store and adaptation to changing market needs.
 
+📊 Midway through the project, we discovered the Trello tool for project workflow, and it has proven to be invaluable in organizing my tasks in the project.
+
 Once the project's requirements have been analyzed, the student will need to develop a RESTful API capable of:
 
 - 🔐 User registration using Bcrypt.

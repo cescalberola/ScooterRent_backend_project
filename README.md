@@ -20,6 +20,12 @@ Welcome to my first backend project for the Online Store! In this project, I com
 
 📊 Midway through the project, we discovered the Trello tool for project workflow, and it has proven to be invaluable in organizing my tasks in the project.
 
+### 💻 📱 Preview relational diagram
+
+<p align="center">
+  <img src="assets/diagrama.png" width="700">
+</p>
+
 Once the project's requirements have been analyzed, the student will need to develop a RESTful API capable of:
 
 - 🔐 User registration using Bcrypt.
@@ -138,10 +144,10 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/YourName`)
 5. Open a Pull Request
 
-### 💻 📱 Preview
+## Preview Workflow
 
 <p align="center">
-  <img src="assets/diagram rel.png" width="700">
+  <img src="assets/workflow-scooterRent.gif" width="700">
 </p>
 
 ## License

@@ -23,7 +23,7 @@ Welcome to my first backend project for the Online Store! In this project, I com
 ### 💻 📱 Preview relational diagram
 
 <p align="center">
-  <img src="assets/diagrama.png" width="700">
+  <img src="assets/diagrama.png" width="900">
 </p>
 
 Once the project's requirements have been analyzed, the student will need to develop a RESTful API capable of:
@@ -147,7 +147,7 @@ Don't forget to give the project a star! Thanks again!
 ## Preview Workflow
 
 <p align="center">
-  <img src="assets/workflow-scooterRent.gif" width="700">
+  <img src="assets/workflow-scooterRent.gif" width="900">
 </p>
 
 ## License

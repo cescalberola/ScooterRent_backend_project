@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
       Scooter.belongsToMany(models.Customer,{
         through:models.CustomerScooter 
       })
-      Scooter.belongsToMany(models.Store,{
-        through:models.StoreScooter
-      })
+   
+      Scooter.belongsTo(models.Store, { foreignKey: 'StoreId' });
+
       Scooter.hasMany(models.Review)
     
     }

@@ -6,9 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   class Store extends Model {
     
     static associate(models) {
-      Store.belongsToMany(models.Scooter,{
-        through:models.StoreScooter
-      })
+
+  Store.hasMany(models.Scooter, {
+    foreignKey: 'StoreId',
+  });
+
     }
   }
   Store.init({

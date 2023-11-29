@@ -1,6 +1,7 @@
-const { Customer, Token, Sequelize, Review } = require("../models/index.js");
+const { Customer, Token, Sequelize, Review,Scooter} = require("../models/index.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const scooter = require("../models/scooter.js");
 const { jwt_secret } = require("../config/config.json")["development"];
 const { Op } = Sequelize;
 
@@ -31,13 +32,39 @@ const CustomerController = {
   async getAll(req, res) {
     try {
       const customers = await Customer.findAll({
-        include: [Review],
+        include: [Review,Scooter]
       });
       res.send(customers);
     } catch (err) {
       console.log(err);
       res.status(500).send({
         message: "There was a problem finding customers",
+      });
+    }
+  },
+  async getInfo(req, res) {
+    try {
+      const customer = await Customer.findByPk(req.customer.id,{
+        include: [Scooter]
+      });
+      res.send(customer);
+    } catch (err) {
+      console.log(err);
+      res.status(500).send({
+        message: "There was a problem finding customers",
+      });
+    }
+  },
+  async getAllUserOrders(req, res) {
+    try {
+      const customers = await Customer.findAll({
+        include: [CustomerScooter],
+      });
+      res.send(customers);
+    } catch (err) {
+      console.log(err);
+      res.status(500).send({
+        message: "There was a problem finding orders",
       });
     }
   },

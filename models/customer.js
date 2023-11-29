@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       through:models.CustomerScooter 
     })
     Customer.hasMany(models.Review);
+    Customer.hasMany(models.CustomerScooter);
     }
   }
     Customer.init({

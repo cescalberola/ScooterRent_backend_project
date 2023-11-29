@@ -4,9 +4,10 @@ const { authentication, isAdmin } = require ("../middleware/authentication.js")
 
 const router = express.Router();
 
-router.post("/", CustomerController.create);
+router.post("/register", CustomerController.create);
 router.post("/login", CustomerController.login);
 router.get("/", CustomerController.getAll);
+router.get("/info",authentication, CustomerController.getInfo);
 router.get("/id/:id", CustomerController.getById);
 router.get("/name/:name", CustomerController.getOneByName);
 router.put("/id/:id",authentication, CustomerController.update);

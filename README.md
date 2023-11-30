@@ -120,7 +120,7 @@ The project will be hosted in a public GitHub repository, and we will appreciate
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/frances0688/CraftyCrates_backend_project
+   git clone https://github.com/cescalberola/ScooterRent_backend_project.git
    ```
 2. Install NPM packages
    ```sh
@@ -150,9 +150,6 @@ Don't forget to give the project a star! Thanks again!
   <img src="assets/workflow-scooterRent.gif" width="900">
 </p>
 
-## License
-
-©️ This project is under license of [Francesc Alberola](https://github.com/cescalberola)
 
 <p align="center">
 <img src="https://imgs.search.brave.com/50JDDd4L1QxFtnwMrj6rn158HP4VG0qHPxVKtKvCPn4/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/d29ybGR2ZWN0b3Js/b2dvLmNvbS9sb2dv/cy9wb3N0bWFuLnN2/Zw.svg" width="30">

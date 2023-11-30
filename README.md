@@ -1,4 +1,4 @@
-# 🛴 Scooter Rent (E-commerce)
+# 🛴 Scooter Rent backend project (E-commerce)
 
 Welcome to my first backend project for the Online Store! In this project, I combine my knowledge of Node.js, Express, and MySQL/Sequelize to develop a RESTful API for managing an online store. 🚀
 
